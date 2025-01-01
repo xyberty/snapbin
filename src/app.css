@@ -1,0 +1,37 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+    body {
+        @apply bg-lavender w-screen h-screen flex flex-col px-8 font-commit text-sm;
+    }
+}
+
+@font-face {
+    font-family: "Commit Mono";
+    src: url("/fonts/CommitMono-400-Regular.otf") format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Commit Mono";
+    src: url("/fonts/CommitMono-400-Italic.otf") format("opentype");
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Commit Mono";
+    src: url("/fonts/CommitMono-700-Regular.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Commit Mono";
+    src: url("/fonts/CommitMono-700-Italic.woff2") format("woff2");
+    font-weight: 700;
+    font-style: italic;
+}
