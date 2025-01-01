@@ -1,23 +1,26 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import type { PageData, ActionData } from "./$types";
     let { form }: { data: PageData; form: ActionData } = $props();
     let copied = $state(false);
 
-    console.log(form);
+    let url = $state("");
+
+    onMount(() => {
+        url = `${window.location.origin}/entry/${form?.key}`;
+    });
 </script>
 
 {#if form?.success && form.key}
     <input
         class="p-3 border border-grape bg-transparent placeholder:text-grape/40 mt-8"
-        value="{window.location.origin}/entry/{form.key}"
+        value={url}
         type="text"
         readonly={true}
     />
     <button
         onclick={async () => {
-            await navigator.clipboard.writeText(
-                `${window.location.origin}/entry/${form.key}`,
-            );
+            await navigator.clipboard.writeText(url);
             copied = true;
         }}
         class="{copied
