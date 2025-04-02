@@ -3,7 +3,7 @@
 </script>
 
 <div class="mx-auto mt-8 flex flex-col w-full max-w-2xl">
-    <h1 class="text-2xl font-bold mb-6 text-grape dark:text-light-grape lowercase">About Pego</h1>
+    <h1 class="text-xl font-semibold mb-6 text-grape dark:text-light-grape lowercase">About Pego</h1>
     
     <div class="space-y-4 text-grape/80 dark:text-light-grape/80">
         <p>

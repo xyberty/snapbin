@@ -6,7 +6,7 @@
 
 <div class="min-h-screen bg-lavender dark:bg-dark-lavender">
     <header class="flex justify-between items-center py-4 border-b border-grape dark:border-light-grape">
-        <a href="/" class="text-2xl font-bold text-grape dark:text-light-grape lowercase">Pego</a>
+        <a href="/" class="text-3xl font-bold text-grape dark:text-light-grape lowercase">Pego</a>
         <div class="flex items-center gap-4">
             <button
                 class="text-grape dark:text-light-grape"
