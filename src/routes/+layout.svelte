@@ -5,11 +5,11 @@
 </script>
 
 <div class="min-h-screen bg-lavender dark:bg-dark-lavender">
-    <header class="flex justify-between items-center py-4 px-8 border-b border-grape dark:border-light-grape">
-        <a href="/" class="text-2xl font-bold text-grape dark:text-light-grape">Pego</a>
+    <header class="flex justify-between items-center py-4 border-b border-grape dark:border-light-grape">
+        <a href="/" class="text-2xl font-bold text-grape dark:text-light-grape lowercase">Pego</a>
         <div class="flex items-center gap-4">
             <button
-                class="text-grape dark:text-light-grape hover:underline"
+                class="text-grape dark:text-light-grape"
                 onclick={() => theme.update(t => t === 'dark' ? 'light' : 'dark')}
             >
                 {#if $theme === 'dark'}
@@ -18,7 +18,7 @@
                     🌙
                 {/if}
             </button>
-            <a href="/info" class="text-grape dark:text-light-grape hover:underline">Info</a>
+            <a href="/info" class="text-grape lowercase dark:text-light-grape hover:underline">Info</a>
         </div>
     </header>
 

@@ -33,7 +33,7 @@
             copy
         {/if}
     </button>
-    <a href="/" class="text-center mt-2 text-grape dark:text-light-grape"> back home </a>
+    <a href="/" class="text-center mt-2 text-grape underline dark:text-light-grape">back home</a>
 {:else}
     <div class="mx-auto mt-8 flex flex-col w-full max-w-4xl">
         <form class="flex flex-col" method="POST">
@@ -51,10 +51,10 @@
             />
             <button class="bg-grape dark:bg-light-grape text-lavender dark:text-dark-lavender px-4 py-2.5 mt-2">save</button>
             {#if form?.badPin}<p class="text-center mt-2 text-red-800 dark:text-red-400">
-                    Bad pin
+                    bad pin
                 </p>{/if}
             {#if form?.noContent}<p class="text-center mt-2 text-red-800 dark:text-red-400">
-                    No Content
+                    no Content
                 </p>{/if}
         </form>
     </div>
