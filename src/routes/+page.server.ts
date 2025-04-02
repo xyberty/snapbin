@@ -1,7 +1,7 @@
 import type { Actions } from "./$types";
 import { env } from "$env/dynamic/private";
-import { Redis } from "@upstash/redis/cloudflare";
 import { fail } from "@sveltejs/kit";
+import clientPromise from "$lib/db";
 
 export const actions = {
   default: async ({ request }) => {
@@ -18,13 +18,18 @@ export const actions = {
     }
 
     const key = generateKey();
-    const redis = Redis.fromEnv({
-      UPSTASH_REDIS_REST_URL: env.REDIS_URL,
-      UPSTASH_REDIS_REST_TOKEN: env.REDIS_BEARER_TOKEN,
-    });
+    const client = await clientPromise;
+    const db = client.db();
+    const collection = db.collection('pastes');
 
-    await redis.set(key, content, {
-      ex: 43200,
+    const timeoutHours = parseInt(env.ENTRY_TIMEOUT_HOURS || "12", 10);
+    const timeoutMs = timeoutHours * 60 * 60 * 1000;
+
+    await collection.insertOne({
+      key,
+      content,
+      createdAt: new Date(),
+      expiresAt: new Date(Date.now() + timeoutMs)
     });
 
     return { success: true, key: key };
