@@ -13,7 +13,7 @@
 
 {#if form?.success && form.key}
     <input
-        class="p-3 border border-grape bg-transparent placeholder:text-grape/40 mt-8"
+        class="p-3 border border-grape dark:border-light-grape bg-transparent placeholder:text-grape/40 dark:placeholder:text-light-grape/40 mt-8 text-grape dark:text-light-grape"
         value={url}
         type="text"
         readonly={true}
@@ -24,8 +24,8 @@
             copied = true;
         }}
         class="{copied
-            ? 'bg-transparent text-grape border border-grape'
-            : 'bg-grape text-lavender'}  px-4 py-2.5 mt-2"
+            ? 'bg-transparent text-grape dark:text-light-grape border border-grape dark:border-light-grape'
+            : 'bg-grape dark:bg-light-grape text-lavender dark:text-dark-lavender'}  px-4 py-2.5 mt-2"
     >
         {#if copied}
             copied!
@@ -33,28 +33,27 @@
             copy
         {/if}
     </button>
-    <a href="/" class="text-center mt-2"> back home </a>
+    <a href="/" class="text-center mt-2 text-grape dark:text-light-grape"> back home </a>
 {:else}
     <div class="mx-auto mt-8 flex flex-col w-full max-w-4xl">
         <form class="flex flex-col" method="POST">
             <textarea
-                class="p-3 border border-grape bg-transparent resize-none h-96 placeholder:text-grape/40"
+                class="p-3 border border-grape dark:border-light-grape bg-transparent resize-none h-96 placeholder:text-grape/40 dark:placeholder:text-light-grape/40 text-grape dark:text-light-grape"
                 name="content"
                 placeholder="type anything"
                 id=""
             ></textarea>
             <input
                 placeholder="enter your pin"
-                class="p-3 border border-grape bg-transparent placeholder:text-grape/40 mt-2"
+                class="p-3 border border-grape dark:border-light-grape bg-transparent placeholder:text-grape/40 dark:placeholder:text-light-grape/40 mt-2 text-grape dark:text-light-grape"
                 name="pin"
                 type="text"
             />
-            <button class="bg-grape text-lavender px-4 py-2.5 mt-2">save</button
-            >
-            {#if form?.badPin}<p class="text-center mt-2 text-red-800">
+            <button class="bg-grape dark:bg-light-grape text-lavender dark:text-dark-lavender px-4 py-2.5 mt-2">save</button>
+            {#if form?.badPin}<p class="text-center mt-2 text-red-800 dark:text-red-400">
                     Bad pin
                 </p>{/if}
-            {#if form?.noContent}<p class="text-center mt-2 text-red-800">
+            {#if form?.noContent}<p class="text-center mt-2 text-red-800 dark:text-red-400">
                     No Content
                 </p>{/if}
         </form>

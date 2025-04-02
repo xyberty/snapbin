@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply bg-lavender w-screen h-screen flex flex-col px-8 font-commit text-sm;
+        @apply bg-lavender dark:bg-dark-lavender w-screen h-screen flex flex-col px-8 font-commit text-sm transition-colors duration-200;
     }
 }
 
