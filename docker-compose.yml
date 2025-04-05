@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PIN=${PIN:-0000}
+      - MONGODB_URI=${MONGODB_URI}
+      - ENTRY_TIMEOUT_HOURS=${ENTRY_TIMEOUT_HOURS:-12}
+      - HOST=${HOST:-0.0.0.0}
+      - PORT=${PORT:-3000}
+    restart: unless-stopped
