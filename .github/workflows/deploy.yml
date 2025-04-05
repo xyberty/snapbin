@@ -42,6 +42,7 @@ jobs:
             if [ ! -d "${{ vars.APP_PATH }}" ]; then
               git clone https://github.com/xyberty/snapbin.git $APP_PATH
             fi
+            ls -la $APP_PATH
             cd $APP_PATH
             # Create or update the .env file with the sensitive environment variables
             echo "PIN=${PIN}" > .env
