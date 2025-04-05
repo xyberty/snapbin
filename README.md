@@ -1,38 +1,58 @@
-# sv
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+# Pego
 
-## Creating a project
+A simple, secure way to share text snippets. Just paste your text, set a pin, and share the link.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Features
 
-```bash
-# create a new project in the current directory
-npx sv create
+- Share text snippets with a simple link
+- Secure with PIN protection
+- Automatic deletion after 12 hours (configurable)
+- No accounts needed
+- Dark/light theme support
 
-# create a new project in my-app
-npx sv create my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Local Development
 
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
+# Build for production
 npm run build
 ```
 
-You can preview the production build with `npm run preview`.
+## Docker Deployment
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+1. Create a `.env` file with your configuration:
+```bash
+PIN="0000"
+MONGODB_URI="your_mongodb_connection_string"
+ENTRY_TIMEOUT_HOURS="12"
+```
+
+2. Build and run with Docker Compose:
+```bash
+docker-compose up --build
+```
+
+The app will be available at http://localhost:3000
+
+## Go Live
+
+To deploy the app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment rather than [Node](https://svelte.dev/docs/kit/adapter-node).
+
+## Environment Variables
+
+- `PIN`: The PIN required to create new entries (default: "0000")
+- `MONGODB_URI`: MongoDB connection string
+- `ENTRY_TIMEOUT_HOURS`: How long entries should be kept (default: 12)
+
+## Technology Stack
+
+- SvelteKit
+- MongoDB
+- TailwindCSS
+- Docker
