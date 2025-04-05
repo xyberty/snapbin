@@ -13,6 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Verify SSH key
+        run: |
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+            echo "Error: SSH_PRIVATE_KEY secret is not set"
+            exit 1
+          fi
+
       - name: Set up SSH agent
         uses: webfactory/ssh-agent@v0.5.4
         with:
@@ -24,6 +31,11 @@ jobs:
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           ENTRY_TIMEOUT_HOURS: ${{ secrets.ENTRY_TIMEOUT_HOURS }}
         run: |
+          if [ -z "${{ secrets.VPS_USER }}" ] || [ -z "${{ secrets.VPS_HOST }}" ]; then
+            echo "Error: VPS_USER or VPS_HOST secrets are not set"
+            exit 1
+          fi
+
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             cd /path/to/your/project
             # Create or update the .env file with the sensitive environment variables
@@ -32,7 +44,7 @@ jobs:
             echo "ENTRY_TIMEOUT_HOURS=${ENTRY_TIMEOUT_HOURS}" >> .env
             chmod 600 .env  # restrict file permissions for security
 
-            # Optionally, pull the latest changes and rebuild your container
+            # Pull the latest changes and rebuild your container
             git pull
             docker-compose build
             docker-compose up -d
