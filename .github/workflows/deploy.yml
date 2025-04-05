@@ -39,7 +39,10 @@ jobs:
           fi
 
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            cd /path/to/your/project
+            if [ ! -d "${{ vars.APP_PATH }}" ]; then
+              git clone https://github.com/xyberty/snapbin.git ${APP_PATH}
+            fi
+            cd ${APP_PATH}
             # Create or update the .env file with the sensitive environment variables
             echo "PIN=${PIN}" > .env
             echo "MONGODB_URI=${MONGODB_URI}" >> .env
