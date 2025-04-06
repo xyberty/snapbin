@@ -38,19 +38,21 @@ jobs:
             exit 1
           fi
 
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << EOF
             if [ ! -d "${{ vars.APP_PATH }}" ]; then
-              git clone https://github.com/xyberty/snapbin.git ${APP_PATH}
+              git clone https://github.com/xyberty/snapbin.git ${{ vars.APP_PATH }}
             fi
-            cd ${APP_PATH}
+            ls -la ${{ vars.APP_PATH }}
+            cd ${{ vars.APP_PATH }}
             # Create or update the .env file with the sensitive environment variables
             echo "PIN=${PIN}" > .env
             echo "MONGODB_URI=${MONGODB_URI}" >> .env
             echo "ENTRY_TIMEOUT_HOURS=${ENTRY_TIMEOUT_HOURS}" >> .env
+            echo "DOMAIN_NAME=${{ vars.DOMAIN_NAME }}" >> .env
             chmod 600 .env  # restrict file permissions for security
 
             # Pull the latest changes and rebuild your container
             git pull
-            docker-compose build
-            docker-compose up -d
+            docker compose build
+            docker compose up -d
           EOF

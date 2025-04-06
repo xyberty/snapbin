@@ -1,14 +1,27 @@
-version: '3.8'
-
 services:
   app:
-    build: .
+    build:
+      context: .
+      args:
+        - MONGODB_URI=${MONGODB_URI}
     ports:
       - "3000:3000"
     environment:
-      - PIN=${PIN:-0000}
+      - PIN=${PIN}
       - MONGODB_URI=${MONGODB_URI}
-      - ENTRY_TIMEOUT_HOURS=${ENTRY_TIMEOUT_HOURS:-12}
-      - HOST=${HOST:-0.0.0.0}
-      - PORT=${PORT:-3000}
+      - ENTRY_TIMEOUT_HOURS=${ENTRY_TIMEOUT_HOURS}
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME:-localhost}
+    volumes:
+      - ./nginx.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+    depends_on:
+      - app
     restart: unless-stopped
