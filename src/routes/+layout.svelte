@@ -4,19 +4,20 @@
 	import { theme } from '$lib/stores/theme';
 	let { children } = $props();
     const appName = 'Pego';
+    const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
 </script>
 
 <svelte:head>
     <title>{appName}</title>
-    {#if import.meta.env.VITE_GA_MEASUREMENT_ID}
-        <script async src="https://www.googletagmanager.com/gtag/js?id={import.meta.env.VITE_GA_MEASUREMENT_ID}"></script>
+    {#if gaId}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
         <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){
-                dataLayer.push(arguments);
+            window.dataLayer = window.dataLayer || []
+            function gtag() {
+                dataLayer.push(arguments)
             }
-            gtag('js', new Date());
-            gtag('config', `${import.meta.env.VITE_GA_MEASUREMENT_ID}`);
+            gtag('js', new Date())
+            gtag('config', '{gaId}')
         </script>
     {/if}
 </svelte:head>
