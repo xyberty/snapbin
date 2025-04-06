@@ -32,6 +32,8 @@ jobs:
           PIN: ${{ secrets.PIN }}
           MONGODB_URI: ${{ secrets.MONGODB_URI }}
           ENTRY_TIMEOUT_HOURS: ${{ secrets.ENTRY_TIMEOUT_HOURS }}
+          VITE_GA_MEASUREMENT_ID: ${{ vars.GA_MEASUREMENT_ID }}
+          DOMAIN_NAME: ${{ vars.DOMAIN_NAME }}
         run: |
           if [ -z "${{ secrets.VPS_USER }}" ] || [ -z "${{ secrets.VPS_HOST }}" ]; then
             echo "Error: VPS_USER or VPS_HOST secrets are not set"
@@ -48,7 +50,8 @@ jobs:
             echo "PIN=${PIN}" > .env
             echo "MONGODB_URI=${MONGODB_URI}" >> .env
             echo "ENTRY_TIMEOUT_HOURS=${ENTRY_TIMEOUT_HOURS}" >> .env
-            echo "DOMAIN_NAME=${{ vars.DOMAIN_NAME }}" >> .env
+            echo "DOMAIN_NAME=${DOMAIN_NAME}" >> .env
+            echo "VITE_GA_MEASUREMENT_ID=${VITE_GA_MEASUREMENT_ID}" >> .env
             chmod 600 .env  # restrict file permissions for security
 
             # Pull the latest changes and rebuild your container
