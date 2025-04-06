@@ -7,7 +7,14 @@ if (!env.MONGODB_URI) {
 }
 
 const uri = env.MONGODB_URI;
-const options = {} as MongoClientOptions;
+const options: MongoClientOptions = {
+    retryWrites: true,
+    retryReads: true,
+    maxPoolSize: 10,
+    minPoolSize: 5,
+    connectTimeoutMS: 10000,
+    socketTimeoutMS: 45000
+};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
