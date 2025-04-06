@@ -2,6 +2,10 @@
     // No props needed for this page
 </script>
 
+<svelte:head>
+    <title>About Pego</title>
+</svelte:head>
+
 <div class="mx-auto mt-8 flex flex-col w-full max-w-2xl">
     <h1 class="text-xl font-semibold mb-6 text-grape dark:text-light-grape lowercase">About Pego</h1>
     

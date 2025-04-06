@@ -6,6 +6,10 @@
     let copied = $state(false);
 </script>
 
+<svelte:head>
+    <title>View Pego</title>
+</svelte:head>
+
 {#if data.content}
     <div class="mx-auto mt-8 flex flex-col w-full max-w-4xl">
         <textarea
