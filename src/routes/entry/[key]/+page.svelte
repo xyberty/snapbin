@@ -1,9 +1,21 @@
 <script lang="ts">
     import type { PageData } from "./$types";
-    import { page } from '$app/state';
+    import { page } from '$app/stores';
+    import { onMount } from 'svelte';
 
     let { data }: { data: PageData } = $props();
     let copied = $state(false);
+
+    onMount(() => {
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+            const gtag = (window as any).gtag;
+            gtag('event', 'entry_view', {
+                page_location: window.location.href,
+                page_path: $page.url.pathname,
+                entry_size: data.content.length
+            });
+        }
+    });
 </script>
 
 <svelte:head>

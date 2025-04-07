@@ -4,6 +4,19 @@
 	import { theme } from '$lib/stores/theme';
 	let { children } = $props();
     const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
+
+    // Track page views
+    $effect(() => {
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+            const gtag = (window as any).gtag;
+            gtag('event', 'page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                page_path: $page.url.pathname,
+                send_to: gaId
+            });
+        }
+    });
 </script>
 
 <svelte:head>
@@ -12,10 +25,13 @@
         <script>
             window.dataLayer = window.dataLayer || []
             function gtag() {
-                dataLayer.push(arguments)
+                window.dataLayer.push(arguments)
             }
             gtag('js', new Date())
-            gtag('config', '{gaId}')
+            gtag('config', '{gaId}', {
+                send_page_view: false, // We'll handle page views manually
+                debug_mode: true // Enable debug mode
+            })
         </script>
     {/if}
 </svelte:head>
