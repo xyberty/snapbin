@@ -1,5 +1,5 @@
 <script lang="ts">
-    // No props needed for this page
+    const timeoutHours = import.meta.env.ENTRY_TIMEOUT_HOURS || 12;
 </script>
 
 <svelte:head>
@@ -11,11 +11,11 @@
     
     <div class="space-y-4 text-grape/80 dark:text-light-grape/80">
         <p>
-            Pego is a simple, secure way to share text snippets. Just paste your text, set a pin, and share the link.
+            Pego is a simple, secure way to share text snippets. It allows you to share code snippets, notes, or any text content that disappears with time.
         </p>
         
         <p>
-            Your entries are automatically deleted after 12 hours, ensuring your data doesn't linger around.
+            Your entries are automatically deleted after {timeoutHours} hours, ensuring your data doesn't linger around. The pin code is shared with a limited number of people to prevent service abuse.
         </p>
         
         <p>

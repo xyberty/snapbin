@@ -3,12 +3,10 @@
 	import { page } from '$app/stores';
 	import { theme } from '$lib/stores/theme';
 	let { children } = $props();
-    const appName = 'Pego';
     const gaId = import.meta.env.VITE_GA_MEASUREMENT_ID;
 </script>
 
 <svelte:head>
-    <title>{appName}</title>
     {#if gaId}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
         <script>
