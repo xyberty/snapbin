@@ -8,7 +8,8 @@ RUN npm install
 
 # Copy source code and build the project
 COPY . .
-RUN npm run build
+RUN npx svelte-kit sync && \
+    MONGODB_URI=mongodb://localhost:27017/dummy npm run build
 
 # Production stage
 FROM node:20-alpine

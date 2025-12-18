@@ -2,8 +2,6 @@ services:
   app:
     build:
       context: .
-      args:
-        - MONGODB_URI=${MONGODB_URI}
     ports:
       - "3000:3000"
     environment:
