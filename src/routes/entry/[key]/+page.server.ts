@@ -1,10 +1,10 @@
 import type { PageServerLoad, Actions } from "./$types";
-import clientPromise from "$lib/db";
+import getDbClient from "$lib/db";
 import { error, fail } from '@sveltejs/kit';
 import { pinLimiter } from "$lib/server/limiter";
 
 export const load: PageServerLoad = async ({ params }) => {
-  const client = await clientPromise;
+  const client = await getDbClient();
   const db = client.db();
   const collection = db.collection('pastes');
 
@@ -40,7 +40,7 @@ export const actions: Actions = {
     const data = await request.formData();
     const pin = data.get("pin");
 
-    const client = await clientPromise;
+    const client = await getDbClient();
     const db = client.db();
     const collection = db.collection('pastes');
 

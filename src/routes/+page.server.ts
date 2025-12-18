@@ -1,7 +1,7 @@
 import type { Actions } from "./$types";
 import { env } from "$env/dynamic/private";
 import { fail } from "@sveltejs/kit";
-import clientPromise from "$lib/db";
+import getDbClient from "$lib/db";
 import { creationLimiter } from "$lib/server/limiter";
 import { verifyAltcha } from "$lib/server/altcha";
 
@@ -31,7 +31,7 @@ export const actions = {
     }
 
     let key = generateKey();
-    const client = await clientPromise;
+    const client = await getDbClient();
     const db = client.db();
     const collection = db.collection('pastes');
 
