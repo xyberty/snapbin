@@ -28,10 +28,7 @@ ENV NODE_ENV=production \
     ENTRY_TIMEOUT_HOURS="12" \
     ALTCHA_HMAC_KEY="change-this-to-a-long-random-string-in-production" \
     HOST="0.0.0.0" \
-    PORT="3000" \
-    PROTOCOL_HEADER=x-forwarded-proto \
-    HOST_HEADER=x-forwarded-host \
-    ADDRESS_HEADER=x-forwarded-for
+    PORT="3000"
 
 # Expose the port your app will run on
 EXPOSE 3000

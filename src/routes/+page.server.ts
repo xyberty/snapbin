@@ -47,15 +47,17 @@ export const actions = {
     const timeoutHours = parseInt(env.ENTRY_TIMEOUT_HOURS || "12", 10);
     const timeoutMs = timeoutHours * 60 * 60 * 1000;
 
+    const expiresAt = new Date(Date.now() + timeoutMs);
+
     await collection.insertOne({
       key,
       content,
       pin: pin || null,
       createdAt: new Date(),
-      expiresAt: new Date(Date.now() + timeoutMs)
+      expiresAt: expiresAt
     });
 
-    return { success: true, key: key };
+    return { success: true, key: key, expiresAt: expiresAt.toISOString() };
   },
 } satisfies Actions;
 

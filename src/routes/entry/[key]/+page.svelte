@@ -2,6 +2,7 @@
     import type { PageData, ActionData } from "./$types";
     import { page } from '$app/stores';
     import { onMount } from 'svelte';
+    import Countdown from "$lib/components/Countdown.svelte";
 
     let { data, form }: { data: PageData; form: ActionData } = $props();
     let copied = $state(false);
@@ -49,6 +50,7 @@
                 copy
             {/if}
         </button>
+        <Countdown expiresAt={data.expiresAt || form?.expiresAt} />
     {:else if data.protected}
         <form method="POST" class="flex flex-col">
             <p class="text-grape dark:text-light-grape mb-4 text-center">this pego is pin-protected</p>
@@ -73,6 +75,7 @@
                     {form.message}
                 </p>
             {/if}
+            <Countdown expiresAt={data.expiresAt} />
         </form>
     {/if}
 </div>

@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import { enhance } from "$app/forms";
     import type { PageData, ActionData } from "./$types";
+    import Countdown from "$lib/components/Countdown.svelte";
     let { form }: { data: PageData; form: ActionData } = $props();
     let copied = $state(false);
     let altchaState = $state("idle"); // idle, verifying, verified
@@ -55,6 +56,7 @@
                 copy
             {/if}
         </button>
+        <Countdown expiresAt={form.expiresAt} />
         <a href="/" class="text-center mt-2 text-grape underline dark:text-light-grape">back home</a>
     </div>
 {:else}

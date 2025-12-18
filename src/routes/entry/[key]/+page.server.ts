@@ -25,6 +25,7 @@ export const load: PageServerLoad = async ({ params }) => {
     success: true,
     protected: isProtected,
     content: isProtected ? null : result.content as string,
+    expiresAt: result.expiresAt instanceof Date ? result.expiresAt.toISOString() : null
   };
 };
 
@@ -60,6 +61,7 @@ export const actions: Actions = {
     return {
       success: true,
       content: result.content as string,
+      expiresAt: result.expiresAt instanceof Date ? result.expiresAt.toISOString() : null
     };
   }
 };

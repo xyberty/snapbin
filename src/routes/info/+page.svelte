@@ -1,5 +1,5 @@
 <script lang="ts">
-    const timeoutHours = import.meta.env.ENTRY_TIMEOUT_HOURS || 12;
+    let { data }: { data: { timeoutHours: number } } = $props();
 </script>
 
 <svelte:head>
@@ -15,7 +15,7 @@
         </p>
         
         <p>
-            Your entries are automatically deleted after {timeoutHours} hours, ensuring your data doesn't linger around.
+            Your entries are automatically deleted after {data.timeoutHours} hours, ensuring your data doesn't linger around.
         </p>
         
         <p>
