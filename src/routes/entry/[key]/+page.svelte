@@ -68,6 +68,11 @@
                     incorrect pin
                 </p>
             {/if}
+            {#if form?.message}
+                <p class="text-center mt-2 text-red-800 dark:text-red-400">
+                    {form.message}
+                </p>
+            {/if}
         </form>
     {/if}
 </div>

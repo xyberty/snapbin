@@ -15,7 +15,7 @@
         </p>
         
         <p>
-            Your entries are automatically deleted after {timeoutHours} hours, ensuring your data doesn't linger around. The pin code is shared with a limited number of people to prevent service abuse.
+            Your entries are automatically deleted after {timeoutHours} hours, ensuring your data doesn't linger around.
         </p>
         
         <p>

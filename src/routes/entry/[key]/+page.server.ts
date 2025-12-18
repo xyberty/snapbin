@@ -1,6 +1,7 @@
 import type { PageServerLoad, Actions } from "./$types";
 import clientPromise from "$lib/db";
 import { error, fail } from '@sveltejs/kit';
+import { pinLimiter } from "$lib/server/limiter";
 
 export const load: PageServerLoad = async ({ params }) => {
   const client = await clientPromise;
@@ -28,7 +29,14 @@ export const load: PageServerLoad = async ({ params }) => {
 };
 
 export const actions: Actions = {
-  default: async ({ request, params }) => {
+  default: async (event) => {
+    const { request, params } = event;
+
+    // Rate limit check for PIN attempts
+    if (await pinLimiter.isLimited(event)) {
+      return fail(429, { message: 'Too many attempts. Please try again later.' });
+    }
+
     const data = await request.formData();
     const pin = data.get("pin");
 

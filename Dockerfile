@@ -29,7 +29,8 @@ ENV NODE_ENV=production \
     HOST="0.0.0.0" \
     PORT="3000" \
     PROTOCOL_HEADER=x-forwarded-proto \
-    HOST_HEADER=x-forwarded-host
+    HOST_HEADER=x-forwarded-host \
+    ADDRESS_HEADER=x-forwarded-for
 
 # Expose the port your app will run on
 EXPOSE 3000

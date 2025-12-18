@@ -59,6 +59,9 @@
             {#if form?.noContent}<p class="text-center mt-2 text-red-800 dark:text-red-400">
                     no Content
                 </p>{/if}
+            {#if form?.retryAfter}<p class="text-center mt-2 text-red-800 dark:text-red-400">
+                    Too many pastes. Please try again later.
+                </p>{/if}
         </form>
     </div>
 {/if}

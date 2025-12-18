@@ -2,9 +2,17 @@ import type { Actions } from "./$types";
 import { env } from "$env/dynamic/private";
 import { fail } from "@sveltejs/kit";
 import clientPromise from "$lib/db";
+import { creationLimiter } from "$lib/server/limiter";
 
 export const actions = {
-  default: async ({ request }) => {
+  default: async (event) => {
+    const { request } = event;
+    
+    // Rate limit check
+    if (await creationLimiter.isLimited(event)) {
+      return fail(429, { success: false, retryAfter: true });
+    }
+
     const data = await request.formData();
     const content = data.get("content");
     const pin = data.get("pin");
