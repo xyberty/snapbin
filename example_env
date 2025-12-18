@@ -1,3 +1,0 @@
-PIN="0000"
-MONGODB_URI="mongodb+srv://your_username:your_password@your_cluster.mongodb.net/your_database?retryWrites=true&w=majority"
-ENTRY_TIMEOUT_HOURS="12"

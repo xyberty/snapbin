@@ -9,18 +9,23 @@ export const actions = {
     const content = data.get("content");
     const pin = data.get("pin");
 
-    if (pin != env.PIN) {
-      return fail(400, { success: false, badPin: true });
-    }
-
     if (content == "") {
       return fail(400, { success: false, noContent: true });
     }
 
-    const key = generateKey();
+    let key = generateKey();
     const client = await clientPromise;
     const db = client.db();
     const collection = db.collection('pastes');
+
+    // Ensure key uniqueness
+    let attempts = 0;
+    while (attempts < 5) {
+      const existing = await collection.findOne({ key, expiresAt: { $gt: new Date() } });
+      if (!existing) break;
+      key = generateKey();
+      attempts++;
+    }
 
     const timeoutHours = parseInt(env.ENTRY_TIMEOUT_HOURS || "12", 10);
     const timeoutMs = timeoutHours * 60 * 60 * 1000;
@@ -28,6 +33,7 @@ export const actions = {
     await collection.insertOne({
       key,
       content,
+      pin: pin || null,
       createdAt: new Date(),
       expiresAt: new Date(Date.now() + timeoutMs)
     });
@@ -39,7 +45,7 @@ export const actions = {
 function generateKey(): string {
   const chars = "abcdefghkmnpqrstuvwxyz23456789";
   return Array.from(
-    { length: 4 },
+    { length: 6 },
     () => chars[Math.floor(Math.random() * chars.length)],
   ).join("");
 }

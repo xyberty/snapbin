@@ -21,8 +21,7 @@ COPY --from=builder /build/static ./static
 RUN npm install --production
 
 # Set default environment variables (can be overridden in docker-compose)
-ENV PIN="0000" \
-    MONGODB_URI="mongodb+srv://your_username:your_password@your_cluster.mongodb.net/your_database?retryWrites=true&w=majority" \
+ENV MONGODB_URI="mongodb+srv://your_username:your_password@your_cluster.mongodb.net/your_database?retryWrites=true&w=majority" \
     ENTRY_TIMEOUT_HOURS="12" \
     HOST="0.0.0.0" \
     PORT="3000" \

@@ -50,15 +50,12 @@
                 id=""
             ></textarea>
             <input
-                placeholder="enter your pin"
+                placeholder="optional pin to protect this pego"
                 class="p-3 border border-grape dark:border-light-grape bg-transparent placeholder:text-grape/40 dark:placeholder:text-light-grape/40 mt-2 text-grape dark:text-light-grape"
                 name="pin"
                 type="text"
             />
             <button class="bg-grape dark:bg-light-grape text-lavender dark:text-dark-lavender px-4 py-2.5 mt-2">save</button>
-            {#if form?.badPin}<p class="text-center mt-2 text-red-800 dark:text-red-400">
-                    bad pin
-                </p>{/if}
             {#if form?.noContent}<p class="text-center mt-2 text-red-800 dark:text-red-400">
                     no Content
                 </p>{/if}

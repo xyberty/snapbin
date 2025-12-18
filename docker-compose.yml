@@ -7,7 +7,6 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - PIN=${PIN}
       - MONGODB_URI=${MONGODB_URI}
       - ENTRY_TIMEOUT_HOURS=${ENTRY_TIMEOUT_HOURS}
     restart: unless-stopped
