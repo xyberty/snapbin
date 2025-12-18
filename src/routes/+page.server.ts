@@ -3,6 +3,7 @@ import { env } from "$env/dynamic/private";
 import { fail } from "@sveltejs/kit";
 import clientPromise from "$lib/db";
 import { creationLimiter } from "$lib/server/limiter";
+import { verifyAltcha } from "$lib/server/altcha";
 
 export const actions = {
   default: async (event) => {
@@ -14,11 +15,19 @@ export const actions = {
     }
 
     const data = await request.formData();
-    const content = data.get("content");
-    const pin = data.get("pin");
+    const content = data.get("content") as string;
+    const pin = data.get("pin") as string;
+    const altchaPayload = data.get("altcha") as string;
+
+    // ALTCHA verification
+    const isValid = altchaPayload && (await verifyAltcha(altchaPayload));
+
+    if (!isValid) {
+      return fail(400, { success: false, captchaFailed: true, content, pin });
+    }
 
     if (content == "") {
-      return fail(400, { success: false, noContent: true });
+      return fail(400, { success: false, noContent: true, pin });
     }
 
     let key = generateKey();

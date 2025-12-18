@@ -8,6 +8,12 @@ declare global {
 		// interface PageState {}
 		// interface Platform {}
 	}
+
+    namespace svelteHTML {
+        interface IntrinsicElements {
+            'altcha-widget': any;
+        }
+    }
 }
 
 export {};

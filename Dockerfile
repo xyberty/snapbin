@@ -26,6 +26,7 @@ COPY --from=builder /build/build ./build
 ENV NODE_ENV=production \
     MONGODB_URI="mongodb+srv://your_username:your_password@your_cluster.mongodb.net/your_database?retryWrites=true&w=majority" \
     ENTRY_TIMEOUT_HOURS="12" \
+    ALTCHA_HMAC_KEY="change-this-to-a-long-random-string-in-production" \
     HOST="0.0.0.0" \
     PORT="3000" \
     PROTOCOL_HEADER=x-forwarded-proto \
