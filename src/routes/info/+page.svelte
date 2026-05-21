@@ -12,6 +12,7 @@
     <div class="space-y-4 text-grape/80 dark:text-light-grape/80">
         <p>
             Pego is a simple, secure way to share text snippets. It allows you to share code snippets, notes, or any text content that disappears with time.
+            Altcha library handles form protection together with a rate limiter.
         </p>
         
         <p>

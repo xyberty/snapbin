@@ -1,5 +1,6 @@
 services:
   app:
+    container_name: pego-app
     build:
       context: .
     ports:
